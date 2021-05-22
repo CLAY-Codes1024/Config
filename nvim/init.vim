@@ -6,6 +6,7 @@ noremap K 5j
 noremap H 5h
 noremap L 5l
 noremap vv <c-v>
+noremap yy Vy
 
 map W :w<CR>
 map Q :q<CR>
@@ -37,7 +38,8 @@ set hlsearch
 set backspace=2
 set scrolloff=5
 set mouse=a
-
+set background=light
+colorscheme space_vim_theme
 
 " ===
 " ===  Compile Function
@@ -126,6 +128,7 @@ filetype plugin indent on
 
 " Encoding settings
 set encoding=utf-8
+set guifont=<FONT_NAME>:h<FONT_SIZE>
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -140,6 +143,9 @@ set conceallevel=0
 
 " airline settings
 " let g:lightline.enable.tabline = 0
+let g:airline_theme='material'
+let g:airline_powerline_fonts = 1
+
 
 " dashboard settings
 nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
@@ -202,12 +208,14 @@ noremap <Leader><Tab> :Bw<CR>
 noremap <Leader><S-Tab> :Bw!<CR>
 noremap <C-t> :tabnew split<CR>
 
+let g:buffet_always_show_tabline=0
+
+
 " neovim-plug settings
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
-" Plug 'ycm-core/YouCompleteMe'
 " Plug 'dense-analysis/ale'
 Plug 'preservim/tagbar'
 Plug 'preservim/tagbar'
@@ -228,7 +236,10 @@ Plug 'gcmt/wildfire.vim'
 Plug 'tpope/vim-surround'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'yaocccc/vim-comment'
-
+Plug 'hzchirs/vim-material'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'liuchengxu/space-vim-theme'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -324,6 +335,7 @@ autocmd  Filetype markdown  inoremap ,2 ##<Space><++><Esc>kA
 autocmd  Filetype markdown  inoremap ,3 ###<Space><++><Esc>kA
 autocmd  Filetype markdown  inoremap ,4 ####<Space><++><Esc>kA
 autocmd  Filetype markdown  inoremap ,l --------<Enter>
+autocmd  Filetype markdown  inoremap ,z <font color='<++>'> <++> </font> <++>
 
 
 " ===
