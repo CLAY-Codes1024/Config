@@ -6,7 +6,10 @@ noremap K 5j
 noremap H 5h
 noremap L 5l
 noremap vv <c-v>
-noremap yy Vy
+noremap Y V"+y
+noremap U <c-r>
+
+vnoremap / gcc
 
 map W :w<CR>
 map Q :q<CR>
@@ -40,6 +43,7 @@ set scrolloff=5
 set mouse=a
 set background=light
 colorscheme space_vim_theme
+
 
 " ===
 " ===  Compile Function
@@ -240,6 +244,9 @@ Plug 'hzchirs/vim-material'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'liuchengxu/space-vim-theme'
 Plug 'ryanoasis/vim-devicons'
+Plug 'voldikss/vim-translator'
+Plug 'dominikduda/vim_current_word'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -393,3 +400,41 @@ let g:vim_line_comments = { 'vim': '"', 'vimrc': '"',
 												 \  'cpp': '//'}
 
 let g:vim_comment_gap = 1
+
+" ===
+" ===  vim-translator
+" ===
+" Display translation in a window
+nmap <silent> <Leader>w <Plug>TranslateW
+vmap <silent> <Leader>w <Plug>TranslateWV
+" Replace the text with translation
+nmap <silent> <Leader>r <Plug>TranslateR
+vmap <silent> <Leader>r <Plug>TranslateRV
+" Translate the text in clipboard
+nmap <silent> <Leader>x <Plug>TranslateX
+
+nnoremap <silent><expr> <M-f> translator#window#float#has_scroll() ?
+                            \ translator#window#float#scroll(1) : "\<M-f>"
+nnoremap <silent><expr> <M-b> translator#window#float#has_scroll() ?
+                            \ translator#window#float#scroll(0) : "\<M-f>"
+
+" ===
+" ===  vim-current-word
+" ===
+let g:vim_current_word#highlight_only_in_focused_window = 1
+
+let g:vim_current_word#highlight_delay = 0
+
+" Twins of word under cursor:
+let g:vim_current_word#highlight_twins = 1
+" The word under cursor:
+let g:vim_current_word#highlight_current_word = 0
+
+"To prevent the plugin from running in one or more buffers add following to your vimrc
+autocmd BufAdd NERD_tree_*,your_buffer_name.rb,*.js :let b:vim_current_word_disabled_in_this_buffer = 1
+
+hi CurretWord guifg=NONE guibg=NONE gui=underline,bold,italic ctermfg=209 ctermbg=230 cterm=underline,bold,italic
+
+hi CurrentWordTwins guifg=NONE guibg=NONE gui=underline,bold,italic ctermfg=209 ctermbg=230 cterm=underline,bold,italic
+
+
